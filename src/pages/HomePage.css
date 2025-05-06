@@ -9,7 +9,15 @@
   padding: 40px;
   height: 150px;
   text-align: center;
-  background-image: url("https://m.media-amazon.com/images/G/31/IN-Events/Arundhati/store-header-MayART25-PC_SS25_v8.gif");
+  position: relative;
+  background-image: url("https://www.amazon.in/ref=nav_logo");
+}
+
+.banner__logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  height: 50px; /* Adjust size as needed */
 }
 
 .homePage__filters {
