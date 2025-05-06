@@ -1,0 +1,15 @@
+/* src/pages/OrderHistory.css */
+.orderHistory {
+    padding: 20px;
+  }
+  
+  .orderHistory__item {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }  
