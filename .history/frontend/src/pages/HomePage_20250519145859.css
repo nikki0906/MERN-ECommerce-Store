@@ -1,0 +1,100 @@
+/* src/pages/HomePage.css */
+.homePage {
+  padding: 20px;
+  background: linear-gradient(45deg, #ffcc80, #ffab40, #ff9100);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+.homePage__banner {
+  background-color: #131921;
+  color: #ffffff;
+  padding: 75px;
+  height: 90px;
+  text-align: center;
+  display: flex;
+  position: relative;
+  background-image: url("https://images-eu.ssl-images-amazon.com/images/G/31/img21/2025/MayART25/GW/ATF/PC/82._CB794852751_.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center; /* Aligns the image from the top */
+  height: 300px; /* Increased height for better visibility */
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.banner__logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  height: 50px;
+}
+
+.homePage__filters {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #f3f3f3;
+  padding: 10px;
+  gap: 20px;
+}
+
+.homePage__filters h3 {
+  margin: 0;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.homePage__filters select {
+  padding: 5px;
+  font-size: 16px;
+}
+
+.homePage__productList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.homePage__productList div {
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.restore-section {
+  margin-top: 20px;
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.restore-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.restore-item button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.restore-item span {
+  font-size: 16px;
+}

@@ -1,0 +1,34 @@
+{
+    "sourceFile": "frontend/src/services/productService.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1747223736651,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747294416607,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,11 @@\n-// services/productService.js\r\n import axios from 'axios';\r\n \r\n-const API_URL = 'http://localhost:5000/api/products';\r\n-\r\n-export const fetchProducts = async (params) => {\r\n+export const getAllProducts = async () => {\r\n   try {\r\n-    const response = await axios.get(API_URL, { params });\r\n-    return response.data;\r\n+    const response = await axios.get('http://localhost:5000/api/products');\r\n+    return { success: true, data: response.data };\r\n   } catch (error) {\r\n-    console.error('Error fetching products:', error.message);\r\n-    throw error;\r\n+    console.error('Error fetching products:', error);\r\n+    return { success: false };\r\n   }\r\n };\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1747296562242,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,14 @@\n import axios from 'axios';\r\n \r\n-export const getAllProducts = async () => {\r\n+const API_URL = \"http://localhost:5000/api/products\";\r\n+\r\n+// Fetch All Products\r\n+export const fetchAllProducts = async () => {\r\n   try {\r\n-    const response = await axios.get('http://localhost:5000/api/products');\r\n-    return { success: true, data: response.data };\r\n+    const response = await axios.get(API_URL);\r\n+    return response.data;\r\n   } catch (error) {\r\n-    console.error('Error fetching products:', error);\r\n-    return { success: false };\r\n+    console.error(\"Error fetching products:\", error);\r\n+    return [];\r\n   }\r\n };\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1747299972450,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,11 @@\n import axios from 'axios';\r\n \r\n-const API_URL = \"http://localhost:5000/api/products\";\r\n-\r\n-// Fetch All Products\r\n export const fetchAllProducts = async () => {\r\n   try {\r\n-    const response = await axios.get(API_URL);\r\n+    const response = await axios.get('http://localhost:5000/api/products');\r\n     return response.data;\r\n   } catch (error) {\r\n-    console.error(\"Error fetching products:\", error);\r\n+    console.error(\"Error fetching products\", error);\r\n     return [];\r\n   }\r\n };\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1747300284264,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import axios from 'axios';\r\n \r\n export const fetchAllProducts = async () => {\r\n   try {\r\n-    const response = await axios.get('http://localhost:5000/api/products');\r\n+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/products`);\r\n     return response.data;\r\n   } catch (error) {\r\n     console.error(\"Error fetching products\", error);\r\n     return [];\r\n"
+                }
+            ],
+            "date": 1747223736651,
+            "name": "Commit-0",
+            "content": "// services/productService.js\r\nimport axios from 'axios';\r\n\r\nconst API_URL = 'http://localhost:5000/api/products';\r\n\r\nexport const fetchProducts = async (params) => {\r\n  try {\r\n    const response = await axios.get(API_URL, { params });\r\n    return response.data;\r\n  } catch (error) {\r\n    console.error('Error fetching products:', error.message);\r\n    throw error;\r\n  }\r\n};"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "backend/routes/productRoutes.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1747308398677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1747308398677,
+            "name": "Commit-0",
+            "content": "import express from 'express';\r\nimport {\r\n  getAllProducts,\r\n  getProductById,\r\n  addProduct,\r\n  updateProduct,\r\n  deleteProduct\r\n} from '../controllers/productController.js';\r\nimport { restoreProduct } from '../controllers/productController.js';\r\n\r\nconst router = express.Router();\r\n\r\n// GET all products\r\nrouter.get('/', getAllProducts);\r\n\r\n// GET product by ID\r\nrouter.get('/:id', getProductById);\r\n\r\nrouter.put('/products/restore/:id', restoreProduct);\r\n\r\n// POST to add a new product\r\nrouter.post('/', (req, res) => {\r\n  console.log('Request Body:', req.body);  // Logging the body of the request for debugging\r\n  addProduct(req, res);  // Calling the addProduct function\r\n});\r\n\r\n// PUT to update product by ID\r\nrouter.put('/:id', updateProduct);\r\n\r\n// DELETE to delete product by ID\r\nrouter.delete('/:id', deleteProduct);\r\n\r\nexport default router;"
+        }
+    ]
+}

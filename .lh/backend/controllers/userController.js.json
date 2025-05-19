@@ -1,0 +1,18 @@
+{
+    "sourceFile": "backend/controllers/userController.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1747296279670,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1747296279670,
+            "name": "Commit-0",
+            "content": "import mongoose from 'mongoose';\r\nimport asyncHandler from 'express-async-handler';\r\nimport User from '../models/userModel.js';\r\nimport generateToken from '../utils/generateToken.js';\r\n\r\nexport const registerUser = asyncHandler(async (req, res) => {\r\n  const { name, email, password } = req.body;\r\n\r\n  const userExists = await User.findOne({ email });\r\n\r\n  if (userExists) {\r\n    res.status(400);\r\n    throw new Error('User already exists');\r\n  }\r\n\r\n  const user = await User.create({\r\n    name,\r\n    email,\r\n    password,\r\n  });\r\n\r\n  if (user) {\r\n    res.status(201).json({\r\n      _id: user._id,\r\n      name: user.name,\r\n      email: user.email,\r\n      token: generateToken(user._id),\r\n    });\r\n  } else {\r\n    res.status(400);\r\n    throw new Error('Invalid user data');\r\n  }\r\n});\r\n\r\nexport const authUser = asyncHandler(async (req, res) => {\r\n  const { email, password } = req.body;\r\n\r\n  const user = await User.findOne({ email });\r\n\r\n  if (user && (await user.matchPassword(password))) {\r\n    res.json({\r\n      _id: user._id,\r\n      name: user.name,\r\n      email: user.email,\r\n      token: generateToken(user._id),\r\n    });\r\n  } else {\r\n    res.status(401);\r\n    throw new Error('Invalid email or password');\r\n  }\r\n});\r\n\r\nexport const getUserProfile = asyncHandler(async (req, res) => {\r\n  const user = await User.findById(req.user._id);\r\n\r\n  if (user) {\r\n    res.json({\r\n      _id: user._id,\r\n      name: user.name,\r\n      email: user.email,\r\n    });\r\n  } else {\r\n    res.status(404);\r\n    throw new Error('User not found');\r\n  }\r\n});\r\n\r\n// GET all users (excluding passwords)\r\nexport const getAllUsers = async (req, res) => {\r\n  try {\r\n    const users = await User.find();\r\n    res.status(200).json(users);\r\n  } catch (error) {\r\n    console.error(error.message);\r\n    res.status(500).json({ message: 'Error fetching users' });\r\n  }\r\n};\r\n\r\n// DELETE user\r\nexport const deleteUser = async (req, res) => {\r\n  try {\r\n    await User.findByIdAndDelete(req.params.id);\r\n    res.json({ message: 'User deleted successfully' });\r\n  } catch (error) {\r\n    res.status(500).json({ message: 'Failed to delete user' });\r\n  }\r\n};\r\n\r\nexport const updateUser = async (req, res) => {\r\n  const userId = req.params.id;\r\n  console.log(\"User ID in the request: \", userId);\r\n\r\n  // Validate the ObjectId\r\n  if (!mongoose.Types.ObjectId.isValid(userId)) {\r\n    return res.status(400).json({ message: \"Invalid User ID\" });\r\n  }\r\n\r\n  const { name, email, isAdmin } = req.body;\r\n\r\n  try {\r\n    // Ensure the query is looking for the correct ObjectId format\r\n    const user = await User.findById(userId);\r\n    if (!user) return res.status(404).json({ message: 'User not found' });\r\n\r\n    // Update fields if new data is provided\r\n    user.name = name || user.name;\r\n    user.email = email || user.email;\r\n    user.isAdmin = isAdmin ?? user.isAdmin;\r\n\r\n    const updatedUser = await user.save();\r\n    res.status(200).json(updatedUser);\r\n  } catch (error) {\r\n    res.status(500).json({ message: 'Server Error', error: error.message });\r\n  }\r\n};"
+        }
+    ]
+}

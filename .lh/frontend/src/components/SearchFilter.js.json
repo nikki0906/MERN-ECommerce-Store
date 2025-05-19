@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/src/components/SearchFilter.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1747300637335,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1747300637335,
+            "name": "Commit-0",
+            "content": "import React from 'react';\r\nimport './SearchFilter.css';\r\n\r\nconst SearchFilter = ({ searchTerm, setSearchTerm }) => {\r\n  return (\r\n    <div className=\"search-filter\">\r\n      <input\r\n        type=\"text\"\r\n        placeholder=\"Search for products...\"\r\n        value={searchTerm}\r\n        onChange={(e) => setSearchTerm(e.target.value)}\r\n      />\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default SearchFilter;"
+        }
+    ]
+}

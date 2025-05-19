@@ -1,0 +1,30 @@
+{
+    "sourceFile": "frontend/src/services/userService.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1747294438439,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747296578100,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,14 @@\n import axios from 'axios';\r\n \r\n-export const getAllUsers = async () => {\r\n+const API_URL = \"http://localhost:5000/api/users\";\r\n+\r\n+// Fetch All Users\r\n+export const fetchAllUsers = async () => {\r\n   try {\r\n-    const response = await axios.get('http://localhost:5000/api/users');\r\n-    return { success: true, data: response.data };\r\n+    const response = await axios.get(API_URL);\r\n+    return response.data;\r\n   } catch (error) {\r\n-    console.error('Error fetching users:', error);\r\n-    return { success: false };\r\n+    console.error(\"Error fetching users:\", error);\r\n+    return [];\r\n   }\r\n };\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1747299961531,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,11 @@\n import axios from 'axios';\r\n \r\n-const API_URL = \"http://localhost:5000/api/users\";\r\n-\r\n-// Fetch All Users\r\n export const fetchAllUsers = async () => {\r\n   try {\r\n-    const response = await axios.get(API_URL);\r\n+    const response = await axios.get('http://localhost:5000/api/users');\r\n     return response.data;\r\n   } catch (error) {\r\n-    console.error(\"Error fetching users:\", error);\r\n+    console.error(\"Error fetching users\", error);\r\n     return [];\r\n   }\r\n };\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1747300295558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import axios from 'axios';\r\n \r\n export const fetchAllUsers = async () => {\r\n   try {\r\n-    const response = await axios.get('http://localhost:5000/api/users');\r\n+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/users`);\r\n     return response.data;\r\n   } catch (error) {\r\n     console.error(\"Error fetching users\", error);\r\n     return [];\r\n"
+                }
+            ],
+            "date": 1747294438439,
+            "name": "Commit-0",
+            "content": "import axios from 'axios';\r\n\r\nexport const getAllUsers = async () => {\r\n  try {\r\n    const response = await axios.get('http://localhost:5000/api/users');\r\n    return { success: true, data: response.data };\r\n  } catch (error) {\r\n    console.error('Error fetching users:', error);\r\n    return { success: false };\r\n  }\r\n};"
+        }
+    ]
+}

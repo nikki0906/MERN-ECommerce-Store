@@ -1,0 +1,15 @@
+.keepShoppingFor {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.keepShoppingFor h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.keepShoppingFor__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}

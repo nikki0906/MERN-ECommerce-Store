@@ -1,0 +1,86 @@
+/* src/components/ProductCard.css */
+
+.product-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  display: flex;
+  gap: 15px;
+  background-color: #f9f9f9;
+}
+
+.product-card__image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.product-card__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card__name {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.product-card__description {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.product-card__price {
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.addToCartBtn {
+  margin-bottom: 5px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.deleteBtn {
+  margin-bottom: 5px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.editBtn {
+  margin-bottom: 5px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.saveBtn {
+  margin-bottom: 5px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.product-card__input {
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}

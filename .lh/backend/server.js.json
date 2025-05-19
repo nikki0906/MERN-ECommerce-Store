@@ -1,0 +1,22 @@
+{
+    "sourceFile": "backend/server.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1747304972101,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747305700614,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,10 @@\n     methods: ['GET', 'POST', 'PUT', 'DELETE']\r\n   }\r\n });\r\n \r\n+app.set('io', io);\r\n+\r\n app.use(cors());\r\n app.use(express.json());\r\n \r\n // Connect to MongoDB\r\n"
+                }
+            ],
+            "date": 1747304972101,
+            "name": "Commit-0",
+            "content": "// server.js\r\nimport express from 'express';\r\nimport dotenv from 'dotenv';\r\nimport mongoose from 'mongoose';\r\nimport cors from 'cors';\r\nimport { createServer } from 'http';\r\nimport { Server } from 'socket.io';\r\n\r\nimport userRoutes from './routes/userRoutes.js';\r\nimport orderRoutes from './routes/orderRoutes.js';\r\nimport cartRoutes from './routes/cartRoutes.js';\r\nimport productRoutes from './routes/productRoutes.js';\r\nimport adminRoutes from './routes/adminRoutes.js';\r\n\r\ndotenv.config();\r\nconst app = express();\r\nconst httpServer = createServer(app);\r\nconst io = new Server(httpServer, {\r\n  cors: {\r\n    origin: '*',\r\n    methods: ['GET', 'POST', 'PUT', 'DELETE']\r\n  }\r\n});\r\n\r\napp.use(cors());\r\napp.use(express.json());\r\n\r\n// Connect to MongoDB\r\nmongoose\r\n  .connect(process.env.MONGO_URI)\r\n  .then(() => console.log('MongoDB connected'))\r\n  .catch((err) => console.error(err));\r\n\r\n// API Routes\r\napp.use('/api/users', userRoutes);\r\napp.use('/api/products', productRoutes);\r\napp.use('/api/admin', adminRoutes);\r\napp.use('/api/orders', orderRoutes);\r\napp.use('/api/cart', cartRoutes);\r\n\r\n// WebSocket connection\r\nio.on('connection', (socket) => {\r\n  console.log(`⚡: New client connected: ${socket.id}`);\r\n\r\n  // Listen for product changes\r\n  socket.on('product-added', (product) => {\r\n    console.log(`🛒 Product Added: ${product.name}`);\r\n    io.emit('update-products', product); // Broadcast to all clients\r\n  });\r\n\r\n  socket.on('disconnect', () => {\r\n    console.log(`❌: Client disconnected: ${socket.id}`);\r\n  });\r\n});\r\n\r\nconst PORT = process.env.PORT || 5000;\r\nhttpServer.listen(PORT, '0.0.0.0', () => {\r\n  console.log(`Server running on port ${PORT}`);\r\n});"
+        }
+    ]
+}

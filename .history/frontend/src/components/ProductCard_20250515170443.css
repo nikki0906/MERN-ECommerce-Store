@@ -1,0 +1,54 @@
+.productCard {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.addToCartBtn {
+  margin-right: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.deleteBtn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.addToCartBtn:hover {
+  background-color: #45a049;
+}
+
+.deleteBtn:hover {
+  background-color: #d32f2f;
+}
+
+/* src/components/ProductCard.css */
+.product-card.deleted {
+  opacity: 0.6;
+  background-color: #ffecec;
+  border: 1px solid #f44336;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.restoreBtn {
+  margin-top: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}

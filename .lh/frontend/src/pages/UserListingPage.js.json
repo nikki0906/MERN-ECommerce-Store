@@ -1,0 +1,38 @@
+{
+    "sourceFile": "frontend/src/pages/UserListingPage.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1747294301020,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747296969026,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,26 +1,29 @@\n import React, { useEffect, useState } from 'react';\r\n-import UserCard from '../components/UserCard';\r\n-import { getAllUsers } from '../services/userService';\r\n+import { fetchAllUsers } from '../../services/userService';\r\n+import UserCard from './UserCard';\r\n+import './UserListing.css';\r\n \r\n const UserListingPage = () => {\r\n   const [users, setUsers] = useState([]);\r\n \r\n+  // Fetch users from the backend\r\n   useEffect(() => {\r\n-    const fetchUsers = async () => {\r\n-      const response = await getAllUsers();\r\n-      if (response.success) {\r\n-        setUsers(response.data);\r\n-      }\r\n+    const getUsers = async () => {\r\n+      const data = await fetchAllUsers();\r\n+      setUsers(data);\r\n     };\r\n-    fetchUsers();\r\n+    getUsers();\r\n   }, []);\r\n \r\n   return (\r\n-    <div className=\"grid grid-cols-3 gap-4 p-4\">\r\n-      {users.map((user) => (\r\n-        <UserCard key={user._id} user={user} />\r\n-      ))}\r\n+    <div className=\"user-listing-page\">\r\n+      <h2>User Listings</h2>\r\n+      <div className=\"user-grid\">\r\n+        {users.map((user) => (\r\n+          <UserCard key={user._id} user={user} />\r\n+        ))}\r\n+      </div>\r\n     </div>\r\n   );\r\n };\r\n \r\n"
+                },
+                {
+                    "date": 1747297374589,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,24 +1,27 @@\n import React, { useEffect, useState } from 'react';\r\n import { fetchAllUsers } from '../../services/userService';\r\n import UserCard from './UserCard';\r\n-import './UserListing.css';\r\n+import './UserListingPage.css';\r\n \r\n const UserListingPage = () => {\r\n   const [users, setUsers] = useState([]);\r\n \r\n-  // Fetch users from the backend\r\n   useEffect(() => {\r\n     const getUsers = async () => {\r\n-      const data = await fetchAllUsers();\r\n-      setUsers(data);\r\n+      try {\r\n+        const data = await fetchAllUsers();\r\n+        setUsers(data);\r\n+      } catch (error) {\r\n+        console.error(\"Error fetching users:\", error);\r\n+      }\r\n     };\r\n     getUsers();\r\n   }, []);\r\n \r\n   return (\r\n     <div className=\"user-listing-page\">\r\n-      <h2>User Listings</h2>\r\n+      <h2>All Users</h2>\r\n       <div className=\"user-grid\">\r\n         {users.map((user) => (\r\n           <UserCard key={user._id} user={user} />\r\n         ))}\r\n"
+                },
+                {
+                    "date": 1747300077594,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useEffect, useState } from 'react';\r\n import { fetchAllUsers } from '../../services/userService';\r\n import UserCard from './UserCard';\r\n-import './UserListingPage.css';\r\n+import './UserListing.css';\r\n \r\n const UserListingPage = () => {\r\n   const [users, setUsers] = useState([]);\r\n \r\n"
+                },
+                {
+                    "date": 1747300199592,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useEffect, useState } from 'react';\r\n-import { fetchAllUsers } from '../../services/userService';\r\n-import UserCard from './UserCard';\r\n-import './UserListing.css';\r\n+import { fetchAllUsers } from '../services/userService';\r\n+import UserCard from '../components/UserCard';\r\n+import './UserListingPage.css';\r\n \r\n const UserListingPage = () => {\r\n   const [users, setUsers] = useState([]);\r\n \r\n"
+                },
+                {
+                    "date": 1747300352450,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useEffect, useState } from 'react';\r\n import { fetchAllUsers } from '../services/userService';\r\n import UserCard from '../components/UserCard';\r\n-import './UserListingPage.css';\r\n+import './UserListing.css';\r\n \r\n const UserListingPage = () => {\r\n   const [users, setUsers] = useState([]);\r\n \r\n"
+                }
+            ],
+            "date": 1747294301020,
+            "name": "Commit-0",
+            "content": "import React, { useEffect, useState } from 'react';\r\nimport UserCard from '../components/UserCard';\r\nimport { getAllUsers } from '../services/userService';\r\n\r\nconst UserListingPage = () => {\r\n  const [users, setUsers] = useState([]);\r\n\r\n  useEffect(() => {\r\n    const fetchUsers = async () => {\r\n      const response = await getAllUsers();\r\n      if (response.success) {\r\n        setUsers(response.data);\r\n      }\r\n    };\r\n    fetchUsers();\r\n  }, []);\r\n\r\n  return (\r\n    <div className=\"grid grid-cols-3 gap-4 p-4\">\r\n      {users.map((user) => (\r\n        <UserCard key={user._id} user={user} />\r\n      ))}\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default UserListingPage;"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/src/components/ContinueShoppingDeals.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1747649230818,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1747649230818,
+            "name": "Commit-0",
+            "content": ".continueShoppingDeals {\r\n  margin-top: 20px;\r\n  padding: 10px;\r\n}\r\n\r\n.continueShoppingDeals h2 {\r\n  font-size: 1.5rem;\r\n  margin-bottom: 10px;\r\n}\r\n\r\n.continueShoppingDeals__list {\r\n  display: grid;\r\n  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));\r\n  gap: 15px;\r\n}"
+        }
+    ]
+}

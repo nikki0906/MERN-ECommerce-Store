@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/src/pages/RegisterPage.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1747223649399,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1747223649399,
+            "name": "Commit-0",
+            "content": "// src/pages/RegisterPage.js\r\nimport React, { useState } from 'react';\r\nimport axios from 'axios';\r\nimport { useNavigate } from 'react-router-dom';\r\nimport { toast } from 'react-toastify';\r\n\r\nconst RegisterPage = () => {\r\n  const [user, setUser] = useState({ name: '', email: '', password: '' });\r\n  const navigate = useNavigate();\r\n\r\n  const handleRegister = async (e) => {\r\n    e.preventDefault();\r\n    try {\r\n      await axios.post('/api/auth/register', user);\r\n      toast.success('Registered! Please login.');\r\n      navigate('/login');\r\n    } catch (err) {\r\n      toast.error('Registration failed');\r\n    }\r\n  };\r\n\r\n  return (\r\n    <form onSubmit={handleRegister} style={styles.form}>\r\n      <h2>Register</h2>\r\n      <input placeholder=\"Name\" value={user.name} onChange={e => setUser({ ...user, name: e.target.value })} required />\r\n      <input placeholder=\"Email\" value={user.email} onChange={e => setUser({ ...user, email: e.target.value })} required />\r\n      <input placeholder=\"Password\" type=\"password\" value={user.password} onChange={e => setUser({ ...user, password: e.target.value })} required />\r\n      <button type=\"submit\">Register</button>\r\n    </form>\r\n  );\r\n};\r\n\r\nconst styles = {\r\n  form: {\r\n    maxWidth: '300px',\r\n    margin: '2rem auto',\r\n    display: 'flex',\r\n    flexDirection: 'column',\r\n    gap: '1rem'\r\n  }\r\n};\r\n\r\nexport default RegisterPage;"
+        }
+    ]
+}

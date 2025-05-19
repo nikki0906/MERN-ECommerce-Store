@@ -1,0 +1,30 @@
+{
+    "sourceFile": "frontend/src/components/UserCard.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1747294397080,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747296761717,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,12 @@\n import React from 'react';\r\n \r\n const UserCard = ({ user }) => {\r\n   return (\r\n-    <div className=\"border p-4 rounded-lg\">\r\n-      <h2 className=\"font-bold text-xl\">{user.name}</h2>\r\n-      <p className=\"text-gray-600\">{user.email}</p>\r\n-      <p className=\"text-gray-500\">{user.role}</p>\r\n+    <div className=\"user-card\">\r\n+      <h3>{user.name}</h3>\r\n+      <p>Email: {user.email}</p>\r\n+      <p>Role: {user.role}</p>\r\n     </div>\r\n   );\r\n };\r\n \r\n"
+                },
+                {
+                    "date": 1747300240047,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n import React from 'react';\r\n+import './UserCard.css';\r\n \r\n const UserCard = ({ user }) => {\r\n   return (\r\n     <div className=\"user-card\">\r\n"
+                },
+                {
+                    "date": 1747303824426,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,12 @@\n import React from 'react';\r\n-import './UserCard.css';\r\n \r\n const UserCard = ({ user }) => {\r\n   return (\r\n-    <div className=\"user-card\">\r\n-      <h3>{user.name}</h3>\r\n-      <p>Email: {user.email}</p>\r\n-      <p>Role: {user.role}</p>\r\n+    <div className=\"border p-4 rounded-lg\">\r\n+      <h2 className=\"font-bold text-xl\">{user.name}</h2>\r\n+      <p className=\"text-gray-600\">{user.email}</p>\r\n+      <p className=\"text-gray-500\">{user.role}</p>\r\n     </div>\r\n   );\r\n };\r\n \r\n"
+                }
+            ],
+            "date": 1747294397080,
+            "name": "Commit-0",
+            "content": "import React from 'react';\r\n\r\nconst UserCard = ({ user }) => {\r\n  return (\r\n    <div className=\"border p-4 rounded-lg\">\r\n      <h2 className=\"font-bold text-xl\">{user.name}</h2>\r\n      <p className=\"text-gray-600\">{user.email}</p>\r\n      <p className=\"text-gray-500\">{user.role}</p>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default UserCard;"
+        }
+    ]
+}

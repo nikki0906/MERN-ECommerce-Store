@@ -1,0 +1,22 @@
+{
+    "sourceFile": "frontend/src/index.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1747637193033,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747637242097,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n @tailwind base;\n @tailwind components;\n @tailwind utilities;\n \n-\n /* index.css */\n body {\n   margin: 0;\n   padding: 0;\n"
+                }
+            ],
+            "date": 1747637193033,
+            "name": "Commit-0",
+            "content": "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n\n/* index.css */\nbody {\n  margin: 0;\n  padding: 0;\n  overflow-x: hidden;\n}\n\n#root {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n}\n\nheader {\n  background-color: #131921;\n  padding: 10px;\n  color: white;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n\n.navbar {\n  display: flex;\n  justify-content: space-around;\n  width: 100%;\n}\n\n.navbar__link {\n  color: white;\n  text-decoration: none;\n}\n\n.banner {\n  position: relative;\n  margin-top: 20px;\n  text-align: center;\n}\n\n.banner__image {\n  width: 100%;\n  height: auto;\n}\n\n.banner__info {\n  position: absolute;\n  top: 20%;\n  left: 0;\n  right: 0;\n  color: white;\n  font-size: 30px;\n}\n\n.product-list {\n  margin: 20px;\n}\n\n.product-list__grid {\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  gap: 20px;\n}\n\n.product-card {\n  padding: 15px;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  text-align: center;\n}\n\n.product-card img {\n  width: 100%;\n  height: 200px;\n  object-fit: cover;\n}\n\nfooter {\n  background-color: #131921;\n  color: white;\n  text-align: center;\n  padding: 10px;\n  margin-top: 20px;\n}"
+        }
+    ]
+}

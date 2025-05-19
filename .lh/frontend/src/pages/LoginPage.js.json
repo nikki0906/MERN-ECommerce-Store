@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/src/pages/LoginPage.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1747223813183,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1747223813183,
+            "name": "Commit-0",
+            "content": "// src/pages/LoginPage.js\r\nimport React, { useState, useContext } from 'react';\r\nimport axios from 'axios';\r\nimport { AuthContext } from '../context/AuthContext';\r\nimport { useNavigate } from 'react-router-dom';\r\nimport { toast } from 'react-toastify';\r\n\r\nconst LoginPage = () => {\r\n  const { login } = useContext(AuthContext);\r\n  const [email, setEmail] = useState('');\r\n  const [password, setPassword] = useState('');\r\n  const navigate = useNavigate();\r\n\r\n  const handleLogin = async (e) => {\r\n    e.preventDefault();\r\n    try {\r\n      const res = await axios.post('/api/auth/login', { email, password });\r\n      login(res.data);\r\n      toast.success('Logged in successfully!');\r\n      navigate('/');\r\n    } catch (err) {\r\n      toast.error('Invalid credentials');\r\n    }\r\n  };\r\n\r\n  return (\r\n    <form onSubmit={handleLogin} style={styles.form}>\r\n      <h2>Login</h2>\r\n      <input placeholder=\"Email\" value={email} onChange={e => setEmail(e.target.value)} required />\r\n      <input placeholder=\"Password\" type=\"password\" value={password} onChange={e => setPassword(e.target.value)} required />\r\n      <button type=\"submit\">Login</button>\r\n    </form>\r\n  );\r\n};\r\n\r\nconst styles = {\r\n  form: {\r\n    maxWidth: '300px',\r\n    margin: '2rem auto',\r\n    display: 'flex',\r\n    flexDirection: 'column',\r\n    gap: '1rem'\r\n  }\r\n};\r\n\r\nexport default LoginPage;"
+        }
+    ]
+}

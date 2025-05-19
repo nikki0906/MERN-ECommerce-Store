@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/src/components/UserCard.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1747300453843,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1747300453843,
+            "name": "Commit-0",
+            "content": ".user-card {\r\n  border: 1px solid #e0e0e0;\r\n  border-radius: 8px;\r\n  padding: 16px;\r\n  margin-bottom: 16px;\r\n  background-color: #f9f9f9;\r\n  transition: box-shadow 0.3s ease;\r\n}\r\n\r\n.user-card:hover {\r\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.user-card h3 {\r\n  font-size: 18px;\r\n  margin-bottom: 8px;\r\n  color: #333;\r\n}\r\n\r\n.user-card p {\r\n  margin: 4px 0;\r\n  color: #555;\r\n}"
+        }
+    ]
+}

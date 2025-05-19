@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/src/components/CategoryFilter.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1747300723422,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1747300723422,
+            "name": "Commit-0",
+            "content": ".category-filter {\r\n  margin-bottom: 20px;\r\n}\r\n\r\n.category-filter select {\r\n  width: 100%;\r\n  padding: 10px;\r\n  font-size: 16px;\r\n  border: 1px solid #ccc;\r\n  border-radius: 4px;\r\n}"
+        }
+    ]
+}

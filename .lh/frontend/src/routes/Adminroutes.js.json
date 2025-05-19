@@ -1,0 +1,26 @@
+{
+    "sourceFile": "frontend/src/routes/AdminRoutes.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1747223683849,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747295125171,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,8 @@\n import React from 'react';\r\n import { Route, Routes, Navigate } from 'react-router-dom';\r\n import AddProductPage from '../pages/AddProductPage.js';\r\n import EditProductPage from '../pages/EditProductPage.js';\r\n-import ProductList from '../components/ProductList.js';\r\n-import UserList from '../components/UserList.js';\r\n \r\n const AdminRoutes = ({ isAdmin }) => {\r\n     if (!isAdmin) {\r\n         return <Navigate to=\"/\" />; // Redirect non-admin users to the home page\r\n"
+                },
+                {
+                    "date": 1747295138612,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,10 +11,8 @@\n     return (\r\n         <Routes>\r\n             <Route path=\"/admin/products/add\" element={<AddProductPage />} />\r\n             <Route path=\"/admin/products/edit/:id\" element={<EditProductPage />} />\r\n-            <Route path=\"/admin/products\" element={<ProductList />} />\r\n-            <Route path=\"/admin/users\" element={<UserList />} />\r\n             {/* You can add more admin-specific routes here */}\r\n         </Routes>\r\n     );\r\n };\r\n"
+                }
+            ],
+            "date": 1747223683849,
+            "name": "Commit-0",
+            "content": "import React from 'react';\r\nimport { Route, Routes, Navigate } from 'react-router-dom';\r\nimport AddProductPage from '../pages/AddProductPage.js';\r\nimport EditProductPage from '../pages/EditProductPage.js';\r\nimport ProductList from '../components/ProductList.js';\r\nimport UserList from '../components/UserList.js';\r\n\r\nconst AdminRoutes = ({ isAdmin }) => {\r\n    if (!isAdmin) {\r\n        return <Navigate to=\"/\" />; // Redirect non-admin users to the home page\r\n    }\r\n\r\n    return (\r\n        <Routes>\r\n            <Route path=\"/admin/products/add\" element={<AddProductPage />} />\r\n            <Route path=\"/admin/products/edit/:id\" element={<EditProductPage />} />\r\n            <Route path=\"/admin/products\" element={<ProductList />} />\r\n            <Route path=\"/admin/users\" element={<UserList />} />\r\n            {/* You can add more admin-specific routes here */}\r\n        </Routes>\r\n    );\r\n};\r\n\r\nexport default AdminRoutes;"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "backend/models/userModel.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1747296161355,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1747296161355,
+            "name": "Commit-0",
+            "content": "import mongoose from 'mongoose';\r\nimport bcrypt from 'bcryptjs';\r\n\r\nconst userSchema = new mongoose.Schema({\r\n  name: { type: String, required: true },\r\n  email: { type: String, required: true, unique: true },\r\n  role: { type: String, enum: ['user', 'admin'], default: 'user' },\r\n  password: { type: String, required: true },\r\n}, {\r\n  timestamps: true,\r\n});\r\n\r\n// Hash password before saving\r\nuserSchema.pre('save', async function (next) {\r\n  if (!this.isModified('password')) return next();\r\n\r\n  const salt = await bcrypt.genSalt(10);\r\n  this.password = await bcrypt.hash(this.password, salt);\r\n  next();\r\n});\r\n\r\n// Add method to compare hashed password\r\nuserSchema.methods.matchPassword = async function (enteredPassword) {\r\n  return await bcrypt.compare(enteredPassword, this.password);\r\n};\r\n\r\nconst User = mongoose.model('User', userSchema);\r\nexport default User;"
+        }
+    ]
+}

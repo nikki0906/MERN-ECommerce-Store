@@ -1,0 +1,26 @@
+{
+    "sourceFile": "frontend/src/components/Navbar.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1747297239020,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747300528573,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,11 +17,8 @@\n             alt=\"Amazon Logo\"\r\n             className=\"navbar__logoImage\"\r\n           />\r\n         </Link>\r\n-        <Link to=\"/\">Home</Link>\r\n-      <Link to=\"/products\">Product Listing</Link>\r\n-      <Link to=\"/users\">User Listing</Link>\r\n       </div>\r\n \r\n       {/* Search Bar */}\r\n       <div className=\"navbar__search\">\r\n"
+                },
+                {
+                    "date": 1747650134653,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,21 +21,29 @@\n       </div>\r\n \r\n       {/* Search Bar */}\r\n       <div className=\"navbar__search\">\r\n-        <input type=\"text\" placeholder=\"Search...\" />\r\n+        <input\r\n+          type=\"text\"\r\n+          placeholder=\"Search for products, brands, and more...\"\r\n+          className=\"navbar__searchInput\"\r\n+        />\r\n         <button className=\"navbar__searchButton\">Search</button>\r\n       </div>\r\n \r\n-      {/* Links and Cart */}\r\n+      {/* Navigation Links */}\r\n       <div className=\"navbar__links\">\r\n-        <Link to=\"/\">Home</Link>\r\n-        <Link to=\"/add-product\">Add Product</Link>\r\n+        <Link to=\"/\" className=\"navbar__link\">Home</Link>\r\n+        <Link to=\"/add-product\" className=\"navbar__link\">Add Product</Link>\r\n+        <Link to=\"/orders\" className=\"navbar__link\">Orders</Link>\r\n+        <Link to=\"/account\" className=\"navbar__link\">Account</Link>\r\n+\r\n+        {/* Cart Icon */}\r\n         <Link to=\"/cart\" className=\"navbar__cart\">\r\n           <img\r\n             src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ33yFKFOQOLGIuLlE561R5UNHAoitYY3ivpA&s\"\r\n             alt=\"Cart\"\r\n-            style={{ width: '45px', height: '30px', marginLeft: '5px'}} // Inline CSS\r\n+            className=\"navbar__cartIcon\"\r\n           />\r\n           {cartItemCount > 0 && (\r\n             <span className=\"navbar__cartCount\">{cartItemCount}</span>\r\n           )}\r\n"
+                }
+            ],
+            "date": 1747297239020,
+            "name": "Commit-0",
+            "content": "import React from 'react';\r\nimport { Link } from 'react-router-dom';\r\nimport { useCart } from '../context/CartContext';  \r\nimport './Navbar.css';\r\n\r\nconst Navbar = () => {\r\n  const { cart } = useCart();\r\n  const cartItemCount = cart?.length || 0;\r\n\r\n  return (\r\n    <div className=\"navbar\">\r\n      {/* Amazon Logo */}\r\n      <div className=\"navbar__logo\">\r\n        <Link to=\"/\">\r\n          <img\r\n            src=\"https://pngimg.com/uploads/amazon/amazon_PNG25.png\"\r\n            alt=\"Amazon Logo\"\r\n            className=\"navbar__logoImage\"\r\n          />\r\n        </Link>\r\n        <Link to=\"/\">Home</Link>\r\n      <Link to=\"/products\">Product Listing</Link>\r\n      <Link to=\"/users\">User Listing</Link>\r\n      </div>\r\n\r\n      {/* Search Bar */}\r\n      <div className=\"navbar__search\">\r\n        <input type=\"text\" placeholder=\"Search...\" />\r\n        <button className=\"navbar__searchButton\">Search</button>\r\n      </div>\r\n\r\n      {/* Links and Cart */}\r\n      <div className=\"navbar__links\">\r\n        <Link to=\"/\">Home</Link>\r\n        <Link to=\"/add-product\">Add Product</Link>\r\n        <Link to=\"/cart\" className=\"navbar__cart\">\r\n          <img\r\n            src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ33yFKFOQOLGIuLlE561R5UNHAoitYY3ivpA&s\"\r\n            alt=\"Cart\"\r\n            style={{ width: '45px', height: '30px', marginLeft: '5px'}} // Inline CSS\r\n          />\r\n          {cartItemCount > 0 && (\r\n            <span className=\"navbar__cartCount\">{cartItemCount}</span>\r\n          )}\r\n        </Link>\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default Navbar;"
+        }
+    ]
+}

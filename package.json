@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "framer-motion": "^12.12.1",
+    "lucide-react": "^0.511.0",
+    "react-slick": "^0.30.3",
+    "slick-carousel": "^1.8.1",
+    "socket.io": "^4.8.1"
+  }
+}

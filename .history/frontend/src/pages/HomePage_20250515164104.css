@@ -1,0 +1,29 @@
+.homePage {
+  padding: 20px;
+}
+
+.homePage__banner {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.homePage__filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.homePage__filters select {
+  padding: 5px;
+}
+
+.homePage__addProduct {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.homePage__productList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}

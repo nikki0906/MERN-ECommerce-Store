@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/src/components/PriceRangeFilter.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1747300761446,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1747300761446,
+            "name": "Commit-0",
+            "content": "import React from 'react';\r\nimport './PriceRangeFilter.css';\r\n\r\nconst PriceRangeFilter = ({ minPrice, maxPrice, setMinPrice, setMaxPrice }) => {\r\n  return (\r\n    <div className=\"price-range-filter\">\r\n      <input\r\n        type=\"number\"\r\n        placeholder=\"Min Price\"\r\n        value={minPrice}\r\n        onChange={(e) => setMinPrice(e.target.value)}\r\n      />\r\n      <input\r\n        type=\"number\"\r\n        placeholder=\"Max Price\"\r\n        value={maxPrice}\r\n        onChange={(e) => setMaxPrice(e.target.value)}\r\n      />\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default PriceRangeFilter;"
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+import React from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import AddProductPage from '../pages/AddProductPage.js';
+import EditProductPage from '../pages/EditProductPage.js';
+
+const AdminRoutes = ({ isAdmin }) => {
+    if (!isAdmin) {
+        return <Navigate to="/" />; // Redirect non-admin users to the home page
+    }
+
+    return (
+        <Routes>
+            <Route path="/admin/products/add" element={<AddProductPage />} />
+            <Route path="/admin/products/edit/:id" element={<EditProductPage />} />
+            {/* You can add more admin-specific routes here */}
+        </Routes>
+    );
+};
+
+export default AdminRoutes;

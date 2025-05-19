@@ -1,0 +1,26 @@
+{
+    "sourceFile": "frontend/src/components/ContinueShoppingDeals.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1747640211869,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747649180001,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,21 +1,15 @@\n import React from \"react\";\r\n+import ProductCard from \"./ProductCard\";\r\n+import \"./ContinueShoppingDeals.css\";\r\n \r\n const ContinueShoppingDeals = ({ products }) => {\r\n   return (\r\n-    <div className=\"mt-10 px-5\">\r\n-      <h2 className=\"text-xl font-bold mb-5 text-gray-800\">Continue Shopping Deals</h2>\r\n-      <div className=\"grid grid-cols-4 gap-4\">\r\n-        {products.slice(5, 9).map((product) => (\r\n-          <div key={product._id} className=\"bg-white p-3 rounded-lg shadow-md\">\r\n-            <img\r\n-              src={product.image}\r\n-              alt={product.name}\r\n-              className=\"w-full h-40 object-cover mb-3 rounded-md\"\r\n-            />\r\n-            <h3 className=\"text-md font-semibold mb-2\">{product.name}</h3>\r\n-            <p className=\"text-lg font-bold text-green-600\">₹{product.price}</p>\r\n-          </div>\r\n+    <div className=\"continueShoppingDeals\">\r\n+      <h2>Continue Shopping Deals</h2>\r\n+      <div className=\"continueShoppingDeals__list\">\r\n+        {products.slice(0, 5).map((product) => (\r\n+          <ProductCard key={product._id} product={product} />\r\n         ))}\r\n       </div>\r\n     </div>\r\n   );\r\n"
+                },
+                {
+                    "date": 1747649420217,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   return (\r\n     <div className=\"continueShoppingDeals\">\r\n       <h2>Continue Shopping Deals</h2>\r\n       <div className=\"continueShoppingDeals__list\">\r\n-        {products.slice(0, 5).map((product) => (\r\n+        {products.slice(0, 6).map((product) => (\r\n           <ProductCard key={product._id} product={product} />\r\n         ))}\r\n       </div>\r\n     </div>\r\n"
+                }
+            ],
+            "date": 1747640211869,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\r\n\r\nconst ContinueShoppingDeals = ({ products }) => {\r\n  return (\r\n    <div className=\"mt-10 px-5\">\r\n      <h2 className=\"text-xl font-bold mb-5 text-gray-800\">Continue Shopping Deals</h2>\r\n      <div className=\"grid grid-cols-4 gap-4\">\r\n        {products.slice(5, 9).map((product) => (\r\n          <div key={product._id} className=\"bg-white p-3 rounded-lg shadow-md\">\r\n            <img\r\n              src={product.image}\r\n              alt={product.name}\r\n              className=\"w-full h-40 object-cover mb-3 rounded-md\"\r\n            />\r\n            <h3 className=\"text-md font-semibold mb-2\">{product.name}</h3>\r\n            <p className=\"text-lg font-bold text-green-600\">₹{product.price}</p>\r\n          </div>\r\n        ))}\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default ContinueShoppingDeals;"
+        }
+    ]
+}

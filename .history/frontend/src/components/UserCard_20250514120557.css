@@ -1,0 +1,30 @@
+.list-container {
+  padding: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.list-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.list-table th, .list-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.product-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
