@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/src/pages/AdminProductList.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1747725600140,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1747725600140,
+            "name": "Commit-0",
+            "content": "// src/pages/AdminProductList.js\r\nimport React, { useEffect, useState } from 'react';\r\nimport axios from 'axios';\r\nimport { Link } from 'react-router-dom';\r\n\r\nconst AdminProductList = () => {\r\n  const [products, setProducts] = useState([]);\r\n  const token = localStorage.getItem('token');\r\n\r\n  const fetchProducts = async () => {\r\n    try {\r\n      const { data } = await axios.get('http://localhost:5000/api/products', {\r\n        headers: { Authorization: `Bearer ${token}` },\r\n      });\r\n      setProducts(data);\r\n    } catch (err) {\r\n      console.error('Error fetching products:', err);\r\n    }\r\n  };\r\n\r\n  const deleteHandler = async (id) => {\r\n    if (window.confirm('Are you sure to delete this product?')) {\r\n      await axios.delete(`http://localhost:5000/api/products/${id}`, {\r\n        headers: { Authorization: `Bearer ${token}` },\r\n      });\r\n      fetchProducts(); // Refresh list\r\n    }\r\n  };\r\n\r\n  useEffect(() => {\r\n    fetchProducts();\r\n  }, []);\r\n\r\n  return (\r\n    <div className=\"p-4\">\r\n      <div className=\"flex justify-between items-center mb-4\">\r\n        <h2 className=\"text-xl font-bold\">All Products</h2>\r\n        <Link\r\n          to=\"/admin/product/new\"\r\n          className=\"bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700\"\r\n        >\r\n          + Add Product\r\n        </Link>\r\n      </div>\r\n\r\n      <table className=\"w-full border\">\r\n        <thead className=\"bg-gray-200\">\r\n          <tr>\r\n            <th className=\"p-2\">Name</th>\r\n            <th className=\"p-2\">Price</th>\r\n            <th className=\"p-2\">Category</th>\r\n            <th className=\"p-2\">Brand</th>\r\n            <th className=\"p-2\">Stock</th>\r\n            <th className=\"p-2\">Actions</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          {products.map((p) => (\r\n            <tr key={p._id}>\r\n              <td className=\"p-2\">{p.name}</td>\r\n              <td className=\"p-2\">₹{p.price}</td>\r\n              <td className=\"p-2\">{p.category}</td>\r\n              <td className=\"p-2\">{p.brand}</td>\r\n              <td className=\"p-2\">{p.countInStock}</td>\r\n              <td className=\"p-2\">\r\n                <Link\r\n                  to={`/admin/product/${p._id}`}\r\n                  className=\"text-blue-500 hover:underline mr-2\"\r\n                >\r\n                  Edit\r\n                </Link>\r\n                <button\r\n                  onClick={() => deleteHandler(p._id)}\r\n                  className=\"text-red-600 hover:underline\"\r\n                >\r\n                  Delete\r\n                </button>\r\n              </td>\r\n            </tr>\r\n          ))}\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default AdminProductList;"
+        }
+    ]
+}

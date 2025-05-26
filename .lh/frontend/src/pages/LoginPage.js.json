@@ -3,11 +3,31 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1747223813183,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747737463344,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,12 @@\n     try {\r\n       const res = await axios.post('/api/auth/login', { email, password });\r\n       login(res.data);\r\n       toast.success('Logged in successfully!');\r\n+\r\n+      // ✅ Save token and user in localStorage\r\n+      localStorage.setItem('token', response.data.token);\r\n+      localStorage.setItem('user', JSON.stringify(response.data.user));\r\n       navigate('/');\r\n     } catch (err) {\r\n       toast.error('Invalid credentials');\r\n     }\r\n"
+                },
+                {
+                    "date": 1747737507125,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,10 @@\n       localStorage.setItem('token', response.data.token);\r\n       localStorage.setItem('user', JSON.stringify(response.data.user));\r\n       navigate('/');\r\n     } catch (err) {\r\n-      toast.error('Invalid credentials');\r\n+      console.error('Login failed:', err);\r\n+      alert('Login failed!');\r\n     }\r\n   };\r\n \r\n   return (\r\n"
+                },
+                {
+                    "date": 1747739780414,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,51 +1,55 @@\n-// src/pages/LoginPage.js\r\n-import React, { useState, useContext } from 'react';\r\n+import React, { useState } from 'react';\r\n import axios from 'axios';\r\n-import { AuthContext } from '../context/AuthContext';\r\n-import { useNavigate } from 'react-router-dom';\r\n-import { toast } from 'react-toastify';\r\n \r\n const LoginPage = () => {\r\n-  const { login } = useContext(AuthContext);\r\n   const [email, setEmail] = useState('');\r\n   const [password, setPassword] = useState('');\r\n-  const navigate = useNavigate();\r\n+  const [error, setError] = useState('');\r\n \r\n-  const handleLogin = async (e) => {\r\n+  const handleSubmit = async (e) => {\r\n     e.preventDefault();\r\n+\r\n     try {\r\n-      const res = await axios.post('/api/auth/login', { email, password });\r\n-      login(res.data);\r\n-      toast.success('Logged in successfully!');\r\n+      const { data } = await axios.post('http://localhost:5000/api/users/login', {\r\n+        email,\r\n+        password,\r\n+      });\r\n \r\n-      // ✅ Save token and user in localStorage\r\n-      localStorage.setItem('token', response.data.token);\r\n-      localStorage.setItem('user', JSON.stringify(response.data.user));\r\n-      navigate('/');\r\n+      // Save token to localStorage\r\n+      localStorage.setItem('token', data.token);\r\n+\r\n+      alert('Login successful!');\r\n+\r\n+      // Redirect user or update UI as needed\r\n+      // e.g. window.location.href = '/cart';\r\n     } catch (err) {\r\n-      console.error('Login failed:', err);\r\n-      alert('Login failed!');\r\n+      setError('Login failed: Invalid email or password');\r\n     }\r\n   };\r\n \r\n   return (\r\n-    <form onSubmit={handleLogin} style={styles.form}>\r\n+    <div>\r\n       <h2>Login</h2>\r\n-      <input placeholder=\"Email\" value={email} onChange={e => setEmail(e.target.value)} required />\r\n-      <input placeholder=\"Password\" type=\"password\" value={password} onChange={e => setPassword(e.target.value)} required />\r\n-      <button type=\"submit\">Login</button>\r\n-    </form>\r\n+      <form onSubmit={handleSubmit}>\r\n+        <input\r\n+          type=\"email\"\r\n+          placeholder=\"Email\"\r\n+          value={email}\r\n+          onChange={(e) => setEmail(e.target.value)}\r\n+          required\r\n+        /><br />\r\n+        <input\r\n+          type=\"password\"\r\n+          placeholder=\"Password\"\r\n+          value={password}\r\n+          onChange={(e) => setPassword(e.target.value)}\r\n+          required\r\n+        /><br />\r\n+        <button type=\"submit\">Login</button>\r\n+      </form>\r\n+      {error && <p style={{ color: 'red' }}>{error}</p>}\r\n+    </div>\r\n   );\r\n };\r\n \r\n-const styles = {\r\n-  form: {\r\n-    maxWidth: '300px',\r\n-    margin: '2rem auto',\r\n-    display: 'flex',\r\n-    flexDirection: 'column',\r\n-    gap: '1rem'\r\n-  }\r\n-};\r\n-\r\n export default LoginPage;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1747740395204,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,12 +9,9 @@\n   const handleSubmit = async (e) => {\r\n     e.preventDefault();\r\n \r\n     try {\r\n-      const { data } = await axios.post('http://localhost:5000/api/users/login', {\r\n-        email,\r\n-        password,\r\n-      });\r\n+      const { data } = await axios.post('http://localhost:5000/api/users/login', { email, password });\r\n \r\n       // Save token to localStorage\r\n       localStorage.setItem('token', data.token);\r\n \r\n"
+                },
+                {
+                    "date": 1748241588887,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,11 +7,13 @@\n   const [error, setError] = useState('');\r\n \r\n   const handleSubmit = async (e) => {\r\n     e.preventDefault();\r\n+    setError('');\r\n \r\n     try {\r\n       const { data } = await axios.post('http://localhost:5000/api/users/login', { email, password });\r\n+      console.log('User logged in:', data);\r\n \r\n       // Save token to localStorage\r\n       localStorage.setItem('token', data.token);\r\n \r\n@@ -19,9 +21,9 @@\n \r\n       // Redirect user or update UI as needed\r\n       // e.g. window.location.href = '/cart';\r\n     } catch (err) {\r\n-      setError('Login failed: Invalid email or password');\r\n+      setError(err.response?.data?.message || 'Login failed');\r\n     }\r\n   };\r\n \r\n   return (\r\n"
                 }
             ],
             "date": 1747223813183,

@@ -1,0 +1,26 @@
+{
+    "sourceFile": "backend/routes/cartRoutes.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1748244213949,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1748244255478,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n import express from \"express\";\r\n import {\r\n   addToCart,\r\n-  getCart,\r\n   updateCartItem,\r\n   removeFromCart,\r\n   clearCart,\r\n } from \"../controllers/cartController.js\";\r\n"
+                },
+                {
+                    "date": 1748244862059,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import express from \"express\";\r\n import {\r\n   addToCart,\r\n+  getCart,\r\n   updateCartItem,\r\n   removeFromCart,\r\n   clearCart,\r\n } from \"../controllers/cartController.js\";\r\n@@ -9,8 +10,9 @@\n \r\n const router = express.Router();\r\n \r\n router.post(\"/add\", protect, addToCart);\r\n+router.get(\"/\", protect, getCart);\r\n router.put(\"/update\", protect, updateCartItem);\r\n router.delete(\"/remove/:productId\", protect, removeFromCart);\r\n router.delete(\"/clear\", protect, clearCart);\r\n \r\n"
+                }
+            ],
+            "date": 1748244213949,
+            "name": "Commit-0",
+            "content": "import express from \"express\";\r\nimport {\r\n  addToCart,\r\n  getCart,\r\n  updateCartItem,\r\n  removeFromCart,\r\n  clearCart,\r\n} from \"../controllers/cartController.js\";\r\nimport { protect } from \"../middleware/authMiddleware.js\";\r\n\r\nconst router = express.Router();\r\n\r\nrouter.post(\"/add\", protect, addToCart);\r\nrouter.put(\"/update\", protect, updateCartItem);\r\nrouter.delete(\"/remove/:productId\", protect, removeFromCart);\r\nrouter.delete(\"/clear\", protect, clearCart);\r\n\r\nexport default router;"
+        }
+    ]
+}

@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1747296279670,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747651567005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,22 +49,20 @@\n     throw new Error('Invalid email or password');\r\n   }\r\n });\r\n \r\n-export const getUserProfile = asyncHandler(async (req, res) => {\r\n-  const user = await User.findById(req.user._id);\r\n-\r\n-  if (user) {\r\n-    res.json({\r\n-      _id: user._id,\r\n-      name: user.name,\r\n-      email: user.email,\r\n-    });\r\n-  } else {\r\n-    res.status(404);\r\n-    throw new Error('User not found');\r\n+export const getUserProfile = async (req, res) => {\r\n+  try {\r\n+    const user = await User.findById(req.user.id).select('-password');\r\n+    if (user) {\r\n+      res.json(user);\r\n+    } else {\r\n+      res.status(404).json({ message: 'User not found' });\r\n+    }\r\n+  } catch (error) {\r\n+    res.status(500).json({ message: 'Server Error' });\r\n   }\r\n-});\r\n+};\r\n \r\n // GET all users (excluding passwords)\r\n export const getAllUsers = async (req, res) => {\r\n   try {\r\n"
                 }
             ],
             "date": 1747296279670,

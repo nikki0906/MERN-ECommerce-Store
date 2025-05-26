@@ -3,11 +3,55 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 11,
             "patches": [
                 {
                     "date": 1747308398677,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747725452351,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,29 +5,24 @@\n   addProduct,\r\n   updateProduct,\r\n   deleteProduct\r\n } from '../controllers/productController.js';\r\n+import { isAdmin, protect } from '../middleware/authMiddleware.js';\r\n import { restoreProduct } from '../controllers/productController.js';\r\n \r\n const router = express.Router();\r\n \r\n-// GET all products\r\n router.get('/', getAllProducts);\r\n-\r\n-// GET product by ID\r\n router.get('/:id', getProductById);\r\n \r\n router.put('/products/restore/:id', restoreProduct);\r\n \r\n-// POST to add a new product\r\n router.post('/', (req, res) => {\r\n-  console.log('Request Body:', req.body);  // Logging the body of the request for debugging\r\n-  addProduct(req, res);  // Calling the addProduct function\r\n+  console.log('Request Body:', req.body);\r\n+  addProduct(req, res);\r\n });\r\n \r\n-// PUT to update product by ID\r\n-router.put('/:id', updateProduct);\r\n+router.post('/', protect, admin, createProduct); // Create Product\r\n+router.put('/:id', protect, admin, updateProduct); // Edit Product\r\n+router.delete('/:id', protect, admin, deleteProduct); // Delete Product\r\n \r\n-// DELETE to delete product by ID\r\n-router.delete('/:id', deleteProduct);\r\n-\r\n export default router;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1747726237228,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   addProduct,\r\n   updateProduct,\r\n   deleteProduct\r\n } from '../controllers/productController.js';\r\n-import { isAdmin, protect } from '../middleware/authMiddleware.js';\r\n+import {  protect } from '../middleware/authMiddleware.js';\r\n import { restoreProduct } from '../controllers/productController.js';\r\n \r\n const router = express.Router();\r\n \r\n"
+                },
+                {
+                    "date": 1747727622263,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,28 @@\n+import express from 'express';\r\n+import {\r\n+  getAllProducts,\r\n+  getProductById,\r\n+  addProduct,\r\n+  updateProduct,\r\n+  deleteProduct\r\n+} from '../controllers/productController.js';\r\n+import {  protect } from '../middleware/authMiddleware.js';\r\n+import { restoreProduct } from '../controllers/productController.js';\r\n+\r\n+const router = express.Router();\r\n+\r\n+router.get('/', getAllProducts);\r\n+router.get('/:id', getProductById);\r\n+\r\n+router.put('/products/restore/:id', restoreProduct);\r\n+\r\n+router.post('/', (req, res) => {\r\n+  console.log('Request Body:', req.body);\r\n+  addProduct(req, res);\r\n+});\r\n+\r\n+router.post('/', protect, createProduct); // Create Product\r\n+router.put('/:id', protect, updateProduct); // Edit Product\r\n+router.delete('/:id', protect, deleteProduct); // Delete Product\r\n+\r\n+export default router;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1747727662146,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,37 +20,9 @@\n   console.log('Request Body:', req.body);\r\n   addProduct(req, res);\r\n });\r\n \r\n-router.post('/', protect, createProduct); // Create Product\r\n+router.post('/', protect, addProduct); // Create Product\r\n router.put('/:id', protect, updateProduct); // Edit Product\r\n router.delete('/:id', protect, deleteProduct); // Delete Product\r\n \r\n-export default router;\n-import express from 'express';\r\n-import {\r\n-  getAllProducts,\r\n-  getProductById,\r\n-  addProduct,\r\n-  updateProduct,\r\n-  deleteProduct\r\n-} from '../controllers/productController.js';\r\n-import {  protect } from '../middleware/authMiddleware.js';\r\n-import { restoreProduct } from '../controllers/productController.js';\r\n-\r\n-const router = express.Router();\r\n-\r\n-router.get('/', getAllProducts);\r\n-router.get('/:id', getProductById);\r\n-\r\n-router.put('/products/restore/:id', restoreProduct);\r\n-\r\n-router.post('/', (req, res) => {\r\n-  console.log('Request Body:', req.body);\r\n-  addProduct(req, res);\r\n-});\r\n-\r\n-router.post('/', protect, admin, createProduct); // Create Product\r\n-router.put('/:id', protect, admin, updateProduct); // Edit Product\r\n-router.delete('/:id', protect, admin, deleteProduct); // Delete Product\r\n-\r\n export default router;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1748246693693,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,21 @@\n   console.log('Request Body:', req.body);\r\n   addProduct(req, res);\r\n });\r\n \r\n+// routes/productRoutes.js\r\n+router.get('/search', async (req, res) => {\r\n+  const query = req.query.q;\r\n+  try {\r\n+    const results = await Product.find({\r\n+      name: { $regex: query, $options: 'i' }, // case-insensitive partial match\r\n+    });\r\n+    res.json(results);\r\n+  } catch (err) {\r\n+    res.status(500).json({ error: 'Search failed' });\r\n+  }\r\n+});\r\n+\r\n router.post('/', protect, addProduct); // Create Product\r\n router.put('/:id', protect, updateProduct); // Edit Product\r\n router.delete('/:id', protect, deleteProduct); // Delete Product\r\n \r\n"
+                },
+                {
+                    "date": 1748246996654,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n const router = express.Router();\r\n \r\n router.get('/', getAllProducts);\r\n router.get('/:id', getProductById);\r\n+router.get(\"/search\", searchProducts);\r\n \r\n router.put('/products/restore/:id', restoreProduct);\r\n \r\n router.post('/', (req, res) => {\r\n"
+                },
+                {
+                    "date": 1748247227741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,10 +11,10 @@\n \r\n const router = express.Router();\r\n \r\n router.get('/', getAllProducts);\r\n+router.get(\"/search\", searchProducts);\r\n router.get('/:id', getProductById);\r\n-router.get(\"/search\", searchProducts);\r\n \r\n router.put('/products/restore/:id', restoreProduct);\r\n \r\n router.post('/', (req, res) => {\r\n"
+                },
+                {
+                    "date": 1748247338368,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,8 @@\n   updateProduct,\r\n   deleteProduct\r\n } from '../controllers/productController.js';\r\n import {  protect } from '../middleware/authMiddleware.js';\r\n-import { restoreProduct } from '../controllers/productController.js';\r\n \r\n const router = express.Router();\r\n \r\n router.get('/', getAllProducts);\r\n"
+                },
+                {
+                    "date": 1748247414906,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n   updateProduct,\r\n   deleteProduct\r\n } from '../controllers/productController.js';\r\n import {  protect } from '../middleware/authMiddleware.js';\r\n+import { restoreProduct, searchProducts } from '../controllers/productController.js';\r\n \r\n const router = express.Router();\r\n \r\n router.get('/', getAllProducts);\r\n"
+                },
+                {
+                    "date": 1748247434933,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   updateProduct,\r\n   deleteProduct\r\n } from '../controllers/productController.js';\r\n import {  protect } from '../middleware/authMiddleware.js';\r\n-import { restoreProduct, searchProducts } from '../controllers/productController.js';\r\n+import { searchProducts } from '../controllers/productController.js';\r\n \r\n const router = express.Router();\r\n \r\n router.get('/', getAllProducts);\r\n"
+                },
+                {
+                    "date": 1748247452932,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,10 +14,8 @@\n router.get('/', getAllProducts);\r\n router.get(\"/search\", searchProducts);\r\n router.get('/:id', getProductById);\r\n \r\n-router.put('/products/restore/:id', restoreProduct);\r\n-\r\n router.post('/', (req, res) => {\r\n   console.log('Request Body:', req.body);\r\n   addProduct(req, res);\r\n });\r\n"
                 }
             ],
             "date": 1747308398677,

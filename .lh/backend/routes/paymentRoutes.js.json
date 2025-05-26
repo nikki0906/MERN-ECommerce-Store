@@ -1,0 +1,30 @@
+{
+    "sourceFile": "backend/routes/paymentRoutes.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1747654554741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747738459382,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,10 @@\n import express from 'express';\r\n import { createOrder } from '../controllers/paymentController.js';\r\n import { protect } from '../middleware/authMiddleware.js';\r\n+import authMiddleware from '../middleware/authMiddleware.js'; // verify JWT\r\n \r\n const router = express.Router();\r\n \r\n-router.post('/order', protect, createOrder);\r\n+router.post('/order', protect, createOrder, authMiddleware);\r\n \r\n export default router;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1747738926731,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,9 @@\n import express from 'express';\r\n import { createOrder } from '../controllers/paymentController.js';\r\n import { protect } from '../middleware/authMiddleware.js';\r\n-import authMiddleware from '../middleware/authMiddleware.js'; // verify JWT\r\n \r\n const router = express.Router();\r\n \r\n-router.post('/order', protect, createOrder, authMiddleware);\r\n+router.post('/order', protect, createOrder);\r\n \r\n export default router;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1747739866598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import express from 'express';\r\n import { createOrder } from '../controllers/paymentController.js';\r\n-import { protect } from '../middleware/authMiddleware.js';\r\n+// import { protect } from '../middleware/authMiddleware.js';\r\n \r\n const router = express.Router();\r\n \r\n-router.post('/order', protect, createOrder);\r\n+router.post('/order', createOrder);\r\n \r\n export default router;\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1747654554741,
+            "name": "Commit-0",
+            "content": "import express from 'express';\r\nimport { createOrder } from '../controllers/paymentController.js';\r\nimport { protect } from '../middleware/authMiddleware.js';\r\n\r\nconst router = express.Router();\r\n\r\nrouter.post('/order', protect, createOrder);\r\n\r\nexport default router;"
+        }
+    ]
+}

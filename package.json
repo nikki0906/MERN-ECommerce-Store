@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "framer-motion": "^12.12.1",
     "lucide-react": "^0.511.0",
     "react-slick": "^0.30.3",

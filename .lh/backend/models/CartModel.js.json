@@ -1,0 +1,18 @@
+{
+    "sourceFile": "backend/models/CartModel.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1748244137565,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1748244137565,
+            "name": "Commit-0",
+            "content": "import mongoose from \"mongoose\";\r\n\r\nconst cartSchema = new mongoose.Schema(\r\n  {\r\n    userId: {\r\n      type: mongoose.Schema.Types.ObjectId,\r\n      ref: \"User\",\r\n      required: true,\r\n    },\r\n    items: [\r\n      {\r\n        productId: {\r\n          type: mongoose.Schema.Types.ObjectId,\r\n          ref: \"Product\",\r\n          required: true,\r\n        },\r\n        quantity: {\r\n          type: Number,\r\n          required: true,\r\n          default: 1,\r\n        },\r\n      },\r\n    ],\r\n  },\r\n  { timestamps: true }\r\n);\r\n\r\nconst Cart = mongoose.model(\"Cart\", cartSchema);\r\nexport default Cart;"
+        }
+    ]
+}

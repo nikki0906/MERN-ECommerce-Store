@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 8,
             "patches": [
                 {
                     "date": 1747296226138,
@@ -24,6 +24,22 @@
                 {
                     "date": 1747309038994,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,6 @@\n // controllers/productController.js\r\n import Product from '../models/productModel.js';\r\n-import User from '../models/userModel.js';\r\n-import Order from '../models/orderModel.js';\r\n-import { io } from '../server.js'; // Import the instance of socket\r\n import dotenv from 'dotenv';\r\n dotenv.config();\r\n \r\n // GET all products\r\n"
+                },
+                {
+                    "date": 1747725557977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,37 +41,43 @@\n     res.status(500).json({ message: error.message });\r\n   }\r\n };\r\n \r\n-// UPDATE product\r\n-export const updateProduct = async (req, res) => {\r\n-  try {\r\n-    const { name, description, price, image } = req.body;\r\n+// Update\r\n+export const updateProduct = asyncHandler(async (req, res) => {\r\n+  const { name, price, description, image, brand, category, countInStock } = req.body;\r\n \r\n-    const product = await Product.findById(req.params.id);\r\n-    if (!product) return res.status(404).json({ message: 'Product not found' });\r\n+  const product = await Product.findById(req.params.id);\r\n \r\n-    product.name = name || product.name;\r\n-    product.description = description || product.description;\r\n-    product.price = price || product.price;\r\n-    product.image = image || product.image;\r\n+  if (product) {\r\n+    product.name = name;\r\n+    product.price = price;\r\n+    product.description = description;\r\n+    product.image = image;\r\n+    product.brand = brand;\r\n+    product.category = category;\r\n+    product.countInStock = countInStock;\r\n \r\n     const updated = await product.save();\r\n-    res.status(200).json(updated);\r\n-  } catch (err) {\r\n-    res.status(500).json({ message: 'Server error', error: err.message });\r\n+    res.json(updated);\r\n+  } else {\r\n+    res.status(404);\r\n+    throw new Error('Product not found');\r\n   }\r\n-};\r\n+});\r\n \r\n-// DELETE product\r\n-export const deleteProduct = async (req, res) => {\r\n-  try {\r\n-    await Product.findByIdAndDelete(req.params.id);\r\n-    res.json({ message: 'Product deleted' });\r\n-  } catch (error) {\r\n-    res.status(500).json({ message: error.message });\r\n+// Delete\r\n+export const deleteProduct = asyncHandler(async (req, res) => {\r\n+  const product = await Product.findById(req.params.id);\r\n+\r\n+  if (product) {\r\n+    await product.remove();\r\n+    res.json({ message: 'Product removed' });\r\n+  } else {\r\n+    res.status(404);\r\n+    throw new Error('Product not found');\r\n   }\r\n-};\r\n+});\r\n \r\n // Get a product by ID\r\n export const getProductById = async (req, res) => {\r\n   try {\r\n@@ -91,5 +97,21 @@\n     res.status(200).json({ message: 'Product restored successfully.' });\r\n   } catch (error) {\r\n     res.status(500).json({ message: 'Error restoring product', error });\r\n   }\r\n-};\n\\ No newline at end of file\n+};\r\n+\r\n+export const createProduct = asyncHandler(async (req, res) => {\r\n+  const product = new Product({\r\n+    name: 'Sample Product',\r\n+    price: 0,\r\n+    user: req.user._id,\r\n+    image: '/images/sample.jpg',\r\n+    brand: 'Sample',\r\n+    category: 'Sample',\r\n+    countInStock: 0,\r\n+    description: 'Sample description',\r\n+  });\r\n+\r\n+  const createdProduct = await product.save();\r\n+  res.status(201).json(createdProduct);\r\n+});\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1747727578052,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n // controllers/productController.js\r\n import Product from '../models/productModel.js';\r\n+import asyncHandler from 'express-async-handler';\r\n import dotenv from 'dotenv';\r\n dotenv.config();\r\n \r\n // GET all products\r\n"
+                },
+                {
+                    "date": 1747742164679,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,10 +9,10 @@\n   try {\r\n     const products = await Product.find();\r\n     res.status(200).json(products);\r\n   } catch (error) {\r\n-    console.error(error.message);\r\n-    res.status(500).json({ message: 'Error fetching products' });\r\n+    console.error('Razorpay Order Creation Error:', error);  // <-- important\r\n+    return res.status(500).json({ message: 'Internal Server Error', error: error.message });\r\n   }\r\n };\r\n \r\n // ADD new product (Fixed)\r\n"
+                },
+                {
+                    "date": 1748247031641,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,16 +89,20 @@\n     res.status(500).json({ message: err.message });\r\n   }\r\n };\r\n \r\n-// In your controller or route file (productController.js)\r\n-export const restoreProduct = async (req, res) => {\r\n-  const { id } = req.params;\r\n+export const searchProducts = async (req, res) => {\r\n   try {\r\n-    await Product.findByIdAndUpdate(id, { isDeleted: false });\r\n-    res.status(200).json({ message: 'Product restored successfully.' });\r\n+    const query = req.query.q;\r\n+\r\n+    const products = await Product.find({\r\n+      name: { $regex: query, $options: \"i\" }, // case-insensitive search\r\n+    });\r\n+\r\n+    res.json(products);\r\n   } catch (error) {\r\n-    res.status(500).json({ message: 'Error restoring product', error });\r\n+    console.error(\"Search Error:\", error);\r\n+    res.status(500).json({ message: \"Server Error in search\" });\r\n   }\r\n };\r\n \r\n export const createProduct = asyncHandler(async (req, res) => {\r\n"
                 }
             ],
             "date": 1747296226138,

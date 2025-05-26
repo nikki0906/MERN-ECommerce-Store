@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 21,
+            "activePatchIndex": 25,
             "patches": [
                 {
                     "date": 1747294369571,
@@ -92,6 +92,22 @@
                 {
                     "date": 1747308876552,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,5 +46,5 @@\n     </div>\r\n   );\r\n };\r\n \r\n-export default ProductCard;\r\n+export default ProductCard;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1748243789950,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,13 +7,13 @@\n   const [isEditing, setIsEditing] = useState(false);\r\n   const [updatedProduct, setUpdatedProduct] = useState({ ...product });\r\n \r\n   const handleAddToCart = () => {\r\n-    addToCart(product);\r\n+    addToCart(productId: product._id, quantity: 1);\r\n   };\r\n \r\n   const handleDelete = () => {\r\n-    onDelete(product); // Calls the delete handler from HomePage\r\n+    onDelete(product);\r\n   };\r\n \r\n   const handleEditToggle = () => {\r\n     setIsEditing(!isEditing);\r\n"
+                },
+                {
+                    "date": 1748243910836,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   const [isEditing, setIsEditing] = useState(false);\r\n   const [updatedProduct, setUpdatedProduct] = useState({ ...product });\r\n \r\n   const handleAddToCart = () => {\r\n-    addToCart(productId: product._id, quantity: 1);\r\n+    addToCart(productId : product._id, quantity : 1);\r\n   };\r\n \r\n   const handleDelete = () => {\r\n     onDelete(product);\r\n"
+                },
+                {
+                    "date": 1748244122889,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   const [isEditing, setIsEditing] = useState(false);\r\n   const [updatedProduct, setUpdatedProduct] = useState({ ...product });\r\n \r\n   const handleAddToCart = () => {\r\n-    addToCart(productId : product._id, quantity : 1);\r\n+    addToCart({productId : product._id, quantity : 1});\r\n   };\r\n \r\n   const handleDelete = () => {\r\n     onDelete(product);\r\n"
+                },
+                {
+                    "date": 1748245797054,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   const [isEditing, setIsEditing] = useState(false);\r\n   const [updatedProduct, setUpdatedProduct] = useState({ ...product });\r\n \r\n   const handleAddToCart = () => {\r\n-    addToCart({productId : product._id, quantity : 1});\r\n+    addToCart(product);\r\n   };\r\n \r\n   const handleDelete = () => {\r\n     onDelete(product);\r\n"
                 }
             ],
             "date": 1747294369571,

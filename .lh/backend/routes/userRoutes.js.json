@@ -1,0 +1,42 @@
+{
+    "sourceFile": "backend/routes/userRoutes.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1747651241127,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747652138979,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import express from 'express';\r\n import { getAllUsers, deleteUser ,updateUser} from '../controllers/userController.js';\r\n import { getUserProfile } from '../controllers/userController.js';\r\n-import { protect } from '../middlewares/authMiddleware.js';\r\n+import { protect } from '../middleware/authMiddleware.js';\r\n \r\n const router = express.Router();\r\n \r\n router.get('/', getAllUsers);          // List\r\n"
+                },
+                {
+                    "date": 1747740408881,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,17 @@\n import express from 'express';\r\n import { getAllUsers, deleteUser ,updateUser} from '../controllers/userController.js';\r\n import { getUserProfile } from '../controllers/userController.js';\r\n import { protect } from '../middleware/authMiddleware.js';\r\n+import { authUser, registerUser } from '../controllers/userController.js';\r\n \r\n const router = express.Router();\r\n \r\n router.get('/', getAllUsers);          // List\r\n router.delete('/:id', deleteUser);     // Delete\r\n router.put('/:id', updateUser); // 👈 Add this\r\n-\r\n router.get('/profile', protect, getUserProfile);\r\n \r\n+router.post('/login', authUser);  // POST /api/users/login\r\n+router.post('/register', registerUser);  // POST /api/users/register\r\n+\r\n export default router;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1748241526692,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,16 +2,20 @@\n import { getAllUsers, deleteUser ,updateUser} from '../controllers/userController.js';\r\n import { getUserProfile } from '../controllers/userController.js';\r\n import { protect } from '../middleware/authMiddleware.js';\r\n import { authUser, registerUser } from '../controllers/userController.js';\r\n+import {registerUser, loginUser, logoutUser, getUserProfile} from '../controllers/authController.js';\r\n \r\n const router = express.Router();\r\n \r\n router.get('/', getAllUsers);          // List\r\n router.delete('/:id', deleteUser);     // Delete\r\n router.put('/:id', updateUser); // 👈 Add this\r\n router.get('/profile', protect, getUserProfile);\r\n \r\n-router.post('/login', authUser);  // POST /api/users/login\r\n+router.post('/login', loginUser);  // POST /api/users/login\r\n router.post('/register', registerUser);  // POST /api/users/register\r\n \r\n+router.post('/logout', logoutUser);\r\n+router.get('/profile', protect, getUserProfile); // ⬅️ New protected route\r\n+\r\n export default router;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1748241676366,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n import express from 'express';\r\n import { getAllUsers, deleteUser ,updateUser} from '../controllers/userController.js';\r\n import { getUserProfile } from '../controllers/userController.js';\r\n import { protect } from '../middleware/authMiddleware.js';\r\n-import { authUser, registerUser } from '../controllers/userController.js';\r\n import {registerUser, loginUser, logoutUser, getUserProfile} from '../controllers/authController.js';\r\n \r\n const router = express.Router();\r\n \r\n"
+                },
+                {
+                    "date": 1748241727809,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,6 @@\n import express from 'express';\r\n import { getAllUsers, deleteUser ,updateUser} from '../controllers/userController.js';\r\n-import { getUserProfile } from '../controllers/userController.js';\r\n import { protect } from '../middleware/authMiddleware.js';\r\n import {registerUser, loginUser, logoutUser, getUserProfile} from '../controllers/authController.js';\r\n \r\n const router = express.Router();\r\n"
+                },
+                {
+                    "date": 1748245752300,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,19 +1,17 @@\n import express from 'express';\r\n import { getAllUsers, deleteUser ,updateUser} from '../controllers/userController.js';\r\n+import { getUserProfile } from '../controllers/userController.js';\r\n import { protect } from '../middleware/authMiddleware.js';\r\n-import {registerUser, loginUser, logoutUser, getUserProfile} from '../controllers/authController.js';\r\n+import { authUser, registerUser } from '../controllers/userController.js';\r\n \r\n const router = express.Router();\r\n \r\n router.get('/', getAllUsers);          // List\r\n router.delete('/:id', deleteUser);     // Delete\r\n router.put('/:id', updateUser); // 👈 Add this\r\n router.get('/profile', protect, getUserProfile);\r\n \r\n-router.post('/login', loginUser);  // POST /api/users/login\r\n+router.post('/login', authUser);  // POST /api/users/login\r\n router.post('/register', registerUser);  // POST /api/users/register\r\n \r\n-router.post('/logout', logoutUser);\r\n-router.get('/profile', protect, getUserProfile); // ⬅️ New protected route\r\n-\r\n export default router;\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1747651241127,
+            "name": "Commit-0",
+            "content": "import express from 'express';\r\nimport { getAllUsers, deleteUser ,updateUser} from '../controllers/userController.js';\r\nimport { getUserProfile } from '../controllers/userController.js';\r\nimport { protect } from '../middlewares/authMiddleware.js';\r\n\r\nconst router = express.Router();\r\n\r\nrouter.get('/', getAllUsers);          // List\r\nrouter.delete('/:id', deleteUser);     // Delete\r\nrouter.put('/:id', updateUser); // 👈 Add this\r\n\r\nrouter.get('/profile', protect, getUserProfile);\r\n\r\nexport default router;"
+        }
+    ]
+}

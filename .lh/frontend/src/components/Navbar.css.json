@@ -3,11 +3,55 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 11,
             "patches": [
                 {
                     "date": 1747650174058,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747655732915,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n .navbar {\r\n   display: flex;\r\n   align-items: center;\r\n   justify-content: space-between;\r\n-  background-color: #232f3e;\r\n+  background-color: white;\r\n   color: white;\r\n   padding: 10px 20px;\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1747655749133,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n .navbar {\r\n   display: flex;\r\n   align-items: center;\r\n   justify-content: space-between;\r\n-  background-color: white;\r\n+  background-color: #131921;\r\n   color: white;\r\n   padding: 10px 20px;\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1747733228338,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,22 +5,26 @@\n   justify-content: space-between;\r\n   background-color: #131921;\r\n   color: white;\r\n   padding: 10px 20px;\r\n+  flex-wrap: wrap;\r\n }\r\n \r\n+/* Logo */\r\n .navbar__logoImage {\r\n   height: 40px;\r\n+  margin-right: 20px;\r\n }\r\n \r\n+/* Center the search bar */\r\n .navbar__search {\r\n+  flex: 1;\r\n   display: flex;\r\n-  flex: 1;\r\n-  margin: 0 20px;\r\n+  justify-content: center;\r\n }\r\n \r\n .navbar__searchInput {\r\n-  width: 100%;\r\n+  width: 60%;\r\n   padding: 8px;\r\n   border: none;\r\n   border-radius: 4px 0 0 4px;\r\n   outline: none;\r\n@@ -33,16 +37,17 @@\n   border-radius: 0 4px 4px 0;\r\n   cursor: pointer;\r\n }\r\n \r\n+/* Right-side links and cart */\r\n .navbar__links {\r\n   display: flex;\r\n+  align-items: center;\r\n   gap: 20px;\r\n-  align-items: center;\r\n }\r\n \r\n .navbar__link {\r\n-  color: white;\r\n+  color: white !important; /* Make sure text is white */\r\n   text-decoration: none;\r\n   font-size: 16px;\r\n   transition: color 0.3s;\r\n }\r\n@@ -50,21 +55,23 @@\n .navbar__link:hover {\r\n   color: #febd69;\r\n }\r\n \r\n+/* Cart section */\r\n .navbar__cart {\r\n   position: relative;\r\n+  margin-left: 10px;\r\n }\r\n \r\n .navbar__cartIcon {\r\n-  width: 45px;\r\n+  width: 30px;\r\n   height: 30px;\r\n }\r\n \r\n .navbar__cartCount {\r\n   position: absolute;\r\n   top: -5px;\r\n-  right: -5px;\r\n+  right: -10px;\r\n   background-color: red;\r\n   color: white;\r\n   border-radius: 50%;\r\n   width: 18px;\r\n"
+                },
+                {
+                    "date": 1747733475049,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,9 +58,9 @@\n \r\n /* Cart section */\r\n .navbar__cart {\r\n   position: relative;\r\n-  margin-left: 10px;\r\n+  margin-left: 5px;\r\n }\r\n \r\n .navbar__cartIcon {\r\n   width: 30px;\r\n"
+                },
+                {
+                    "date": 1747733715525,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,27 +57,26 @@\n }\r\n \r\n /* Cart section */\r\n .navbar__cart {\r\n+  display: flex;\r\n+  align-items: center;\r\n   position: relative;\r\n-  margin-left: 5px;\r\n+  margin-left: 20px;\r\n }\r\n \r\n .navbar__cartIcon {\r\n   width: 30px;\r\n   height: 30px;\r\n+  object-fit: contain;\r\n }\r\n \r\n .navbar__cartCount {\r\n   position: absolute;\r\n   top: -5px;\r\n   right: -10px;\r\n   background-color: red;\r\n   color: white;\r\n+  padding: 2px 6px;\r\n   border-radius: 50%;\r\n-  width: 18px;\r\n-  height: 18px;\r\n-  display: flex;\r\n-  align-items: center;\r\n-  justify-content: center;\r\n   font-size: 12px;\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1747733907231,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,8 +67,9 @@\n .navbar__cartIcon {\r\n   width: 30px;\r\n   height: 30px;\r\n   object-fit: contain;\r\n+  margin-left: 10px;\r\n }\r\n \r\n .navbar__cartCount {\r\n   position: absolute;\r\n"
+                },
+                {
+                    "date": 1747733925348,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,9 +67,9 @@\n .navbar__cartIcon {\r\n   width: 30px;\r\n   height: 30px;\r\n   object-fit: contain;\r\n-  margin-left: 10px;\r\n+  margin-right: 10px;\r\n }\r\n \r\n .navbar__cartCount {\r\n   position: absolute;\r\n"
+                },
+                {
+                    "date": 1747733936524,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,9 +67,9 @@\n .navbar__cartIcon {\r\n   width: 30px;\r\n   height: 30px;\r\n   object-fit: contain;\r\n-  margin-right: 10px;\r\n+  margin-right: 20px;\r\n }\r\n \r\n .navbar__cartCount {\r\n   position: absolute;\r\n"
+                },
+                {
+                    "date": 1747733949091,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,9 +67,9 @@\n .navbar__cartIcon {\r\n   width: 30px;\r\n   height: 30px;\r\n   object-fit: contain;\r\n-  margin-right: 20px;\r\n+  margin-right: 30px;\r\n }\r\n \r\n .navbar__cartCount {\r\n   position: absolute;\r\n"
+                },
+                {
+                    "date": 1747733968872,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,9 +67,9 @@\n .navbar__cartIcon {\r\n   width: 30px;\r\n   height: 30px;\r\n   object-fit: contain;\r\n-  margin-right: 30px;\r\n+  margin-left: 30px;\r\n }\r\n \r\n .navbar__cartCount {\r\n   position: absolute;\r\n"
+                },
+                {
+                    "date": 1747733982208,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,9 +67,9 @@\n .navbar__cartIcon {\r\n   width: 30px;\r\n   height: 30px;\r\n   object-fit: contain;\r\n-  margin-left: 30px;\r\n+  margin-right: 40px;\r\n }\r\n \r\n .navbar__cartCount {\r\n   position: absolute;\r\n"
                 }
             ],
             "date": 1747650174058,

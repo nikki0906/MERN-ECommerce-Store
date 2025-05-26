@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1747296161355,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747652412052,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,28 +1,29 @@\n import mongoose from 'mongoose';\r\n-import bcrypt from 'bcryptjs';\r\n \r\n-const userSchema = new mongoose.Schema({\r\n-  name: { type: String, required: true },\r\n-  email: { type: String, required: true, unique: true },\r\n-  role: { type: String, enum: ['user', 'admin'], default: 'user' },\r\n-  password: { type: String, required: true },\r\n-}, {\r\n-  timestamps: true,\r\n-});\r\n+const userSchema = new mongoose.Schema(\r\n+  {\r\n+    name: {\r\n+      type: String,\r\n+      required: [true, 'Please enter your name'],\r\n+    },\r\n+    email: {\r\n+      type: String,\r\n+      required: [true, 'Please enter your email'],\r\n+      unique: true,\r\n+    },\r\n+    password: {\r\n+      type: String,\r\n+      required: [true, 'Please enter your password'],\r\n+    },\r\n+    isAdmin: {\r\n+      type: Boolean,\r\n+      default: false,\r\n+    },\r\n+  },\r\n+  {\r\n+    timestamps: true,\r\n+  }\r\n+);\r\n \r\n-// Hash password before saving\r\n-userSchema.pre('save', async function (next) {\r\n-  if (!this.isModified('password')) return next();\r\n-\r\n-  const salt = await bcrypt.genSalt(10);\r\n-  this.password = await bcrypt.hash(this.password, salt);\r\n-  next();\r\n-});\r\n-\r\n-// Add method to compare hashed password\r\n-userSchema.methods.matchPassword = async function (enteredPassword) {\r\n-  return await bcrypt.compare(enteredPassword, this.password);\r\n-};\r\n-\r\n const User = mongoose.model('User', userSchema);\r\n export default User;\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1747296161355,

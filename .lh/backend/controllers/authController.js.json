@@ -1,0 +1,34 @@
+{
+    "sourceFile": "backend/controllers/authController.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1747651515118,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747652189466,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import User from '../models/User.js';\r\n+import userModel from '../models/userModel.js';\r\n import bcrypt from 'bcryptjs';\r\n import jwt from 'jsonwebtoken';\r\n \r\n // =============================\r\n"
+                },
+                {
+                    "date": 1747652363628,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import userModel from '../models/userModel.js';\r\n+import User from '../models/userModel.js';\r\n import bcrypt from 'bcryptjs';\r\n import jwt from 'jsonwebtoken';\r\n \r\n // =============================\r\n"
+                },
+                {
+                    "date": 1748241293963,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,5 +74,20 @@\n const generateToken = (id) => {\r\n   return jwt.sign({ id }, process.env.JWT_SECRET, {\r\n     expiresIn: '30d',\r\n   });\r\n+};\r\n+\r\n+// =============================\r\n+//     Get User Profile\r\n+// =============================\r\n+export const getUserProfile = async (req, res) => {\r\n+  try {\r\n+    const user = await User.findById(req.user.id).select('-password');\r\n+    if (!user) {\r\n+      return res.status(404).json({ message: 'User not found' });\r\n+    }\r\n+    res.json(user);\r\n+  } catch (error) {\r\n+    res.status(500).json({ message: 'Server Error' });\r\n+  }\r\n };\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1748245566382,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,20 +74,5 @@\n const generateToken = (id) => {\r\n   return jwt.sign({ id }, process.env.JWT_SECRET, {\r\n     expiresIn: '30d',\r\n   });\r\n-};\r\n-\r\n-// =============================\r\n-//     Get User Profile\r\n-// =============================\r\n-export const getUserProfile = async (req, res) => {\r\n-  try {\r\n-    const user = await User.findById(req.user.id).select('-password');\r\n-    if (!user) {\r\n-      return res.status(404).json({ message: 'User not found' });\r\n-    }\r\n-    res.json(user);\r\n-  } catch (error) {\r\n-    res.status(500).json({ message: 'Server Error' });\r\n-  }\r\n };\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1747651515118,
+            "name": "Commit-0",
+            "content": "import User from '../models/User.js';\r\nimport bcrypt from 'bcryptjs';\r\nimport jwt from 'jsonwebtoken';\r\n\r\n// =============================\r\n//        Register User\r\n// =============================\r\nexport const registerUser = async (req, res) => {\r\n  try {\r\n    const { name, email, password } = req.body;\r\n\r\n    // Check if user already exists\r\n    const existingUser = await User.findOne({ email });\r\n    if (existingUser) {\r\n      return res.status(400).json({ message: 'User already exists' });\r\n    }\r\n\r\n    // Hash the password\r\n    const salt = await bcrypt.genSalt(10);\r\n    const hashedPassword = await bcrypt.hash(password, salt);\r\n\r\n    // Create new user\r\n    const user = await User.create({\r\n      name,\r\n      email,\r\n      password: hashedPassword,\r\n    });\r\n\r\n    res.status(201).json({\r\n      _id: user._id,\r\n      name: user.name,\r\n      email: user.email,\r\n      token: generateToken(user._id),\r\n    });\r\n  } catch (error) {\r\n    res.status(500).json({ message: 'Server Error' });\r\n  }\r\n};\r\n\r\n// =============================\r\n//        Login User\r\n// =============================\r\nexport const loginUser = async (req, res) => {\r\n  try {\r\n    const { email, password } = req.body;\r\n\r\n    // Find user by email\r\n    const user = await User.findOne({ email });\r\n    if (user && (await bcrypt.compare(password, user.password))) {\r\n      res.json({\r\n        _id: user._id,\r\n        name: user.name,\r\n        email: user.email,\r\n        token: generateToken(user._id),\r\n      });\r\n    } else {\r\n      res.status(401).json({ message: 'Invalid credentials' });\r\n    }\r\n  } catch (error) {\r\n    res.status(500).json({ message: 'Server Error' });\r\n  }\r\n};\r\n\r\n// =============================\r\n//        Logout User\r\n// =============================\r\nexport const logoutUser = (req, res) => {\r\n  res.status(200).json({ message: 'User logged out successfully' });\r\n};\r\n\r\n// =============================\r\n//     Generate JWT Token\r\n// =============================\r\nconst generateToken = (id) => {\r\n  return jwt.sign({ id }, process.env.JWT_SECRET, {\r\n    expiresIn: '30d',\r\n  });\r\n};"
+        }
+    ]
+}

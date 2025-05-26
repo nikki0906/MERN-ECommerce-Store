@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/src/index.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1747734752261,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1747734752261,
+            "name": "Commit-0",
+            "content": "import React from 'react';\nimport ReactDOM from 'react-dom/client';\nimport App from './App';\nimport './index.css';\nimport { CartProvider } from './context/CartContext';\nimport { AuthProvider } from './context/AuthContext';\n\nReactDOM.createRoot(document.getElementById('root')).render(\n  <React.StrictMode>\n    <AuthProvider>\n      <CartProvider>\n        <App />\n      </CartProvider>\n    </AuthProvider>\n  </React.StrictMode>\n)"
+        }
+    ]
+}

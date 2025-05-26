@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/src/pages/SearchPage.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1748246592903,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1748246592903,
+            "name": "Commit-0",
+            "content": "import React, { useEffect, useState } from 'react';\r\nimport { useLocation } from 'react-router-dom';\r\nimport axios from 'axios';\r\nimport ProductCard from '../components/ProductCard';\r\n\r\nconst SearchPage = () => {\r\n  const [results, setResults] = useState([]);\r\n  const { search } = useLocation(); // e.g. ?q=shoes\r\n  const query = new URLSearchParams(search).get('q');\r\n\r\n  useEffect(() => {\r\n    const fetchResults = async () => {\r\n      try {\r\n        const { data } = await axios.get(`http://localhost:5000/api/products/search?q=${query}`);\r\n        setResults(data);\r\n      } catch (err) {\r\n        console.error('Search failed:', err);\r\n      }\r\n    };\r\n\r\n    if (query) fetchResults();\r\n  }, [query]);\r\n\r\n  return (\r\n    <div style={{ padding: '1rem' }}>\r\n      <h2>Search Results for \"{query}\"</h2>\r\n      <div className=\"product-list\">\r\n        {results.length > 0 ? (\r\n          results.map(product => (\r\n            <ProductCard key={product._id} product={product} />\r\n          ))\r\n        ) : (\r\n          <p>No products found.</p>\r\n        )}\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default SearchPage;"
+        }
+    ]
+}

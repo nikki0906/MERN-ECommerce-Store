@@ -1,0 +1,30 @@
+{
+    "sourceFile": "backend/middleware/authMiddleware.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1747651681506,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747652459981,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import jwt from 'jsonwebtoken';\r\n-import User from '../models/User.js';\r\n+import User from '../models/userModel.js';\r\n \r\n export const protect = async (req, res, next) => {\r\n   let token;\r\n \r\n"
+                },
+                {
+                    "date": 1748241579356,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,12 +19,12 @@\n       req.user = await User.findById(decoded.id).select('-password');\r\n \r\n       next();\r\n     } catch (error) {\r\n-      res.status(401).json({ message: 'Not authorized, token failed' });\r\n+      return res.status(401).json({ message: 'Not authorized, token failed' });\r\n     }\r\n   }\r\n \r\n   if (!token) {\r\n-    res.status(401).json({ message: 'Not authorized, no token' });\r\n+    return res.status(401).json({ message: 'Not authorized, no token' });\r\n   }\r\n };\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1748245649560,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,12 +19,12 @@\n       req.user = await User.findById(decoded.id).select('-password');\r\n \r\n       next();\r\n     } catch (error) {\r\n-      return res.status(401).json({ message: 'Not authorized, token failed' });\r\n+      res.status(401).json({ message: 'Not authorized, token failed' });\r\n     }\r\n   }\r\n \r\n   if (!token) {\r\n-    return res.status(401).json({ message: 'Not authorized, no token' });\r\n+    res.status(401).json({ message: 'Not authorized, no token' });\r\n   }\r\n };\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1747651681506,
+            "name": "Commit-0",
+            "content": "import jwt from 'jsonwebtoken';\r\nimport User from '../models/User.js';\r\n\r\nexport const protect = async (req, res, next) => {\r\n  let token;\r\n\r\n  if (\r\n    req.headers.authorization &&\r\n    req.headers.authorization.startsWith('Bearer')\r\n  ) {\r\n    try {\r\n      // Get token from header\r\n      token = req.headers.authorization.split(' ')[1];\r\n\r\n      // Verify token\r\n      const decoded = jwt.verify(token, process.env.JWT_SECRET);\r\n\r\n      // Get user from the token\r\n      req.user = await User.findById(decoded.id).select('-password');\r\n\r\n      next();\r\n    } catch (error) {\r\n      res.status(401).json({ message: 'Not authorized, token failed' });\r\n    }\r\n  }\r\n\r\n  if (!token) {\r\n    res.status(401).json({ message: 'Not authorized, no token' });\r\n  }\r\n};"
+        }
+    ]
+}

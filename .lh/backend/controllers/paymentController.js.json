@@ -1,0 +1,30 @@
+{
+    "sourceFile": "backend/controllers/paymentController.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1747654526155,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1747738454583,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,11 +6,8 @@\n   key_id: process.env.RAZORPAY_KEY_ID,\r\n   key_secret: process.env.RAZORPAY_KEY_SECRET,\r\n });\r\n \r\n-// @desc    Create Razorpay Order\r\n-// @route   POST /api/payments/order\r\n-// @access  Private\r\n export const createOrder = async (req, res) => {\r\n   const { amount } = req.body;\r\n \r\n   try {\r\n"
+                },
+                {
+                    "date": 1747739286355,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,16 +9,20 @@\n \r\n export const createOrder = async (req, res) => {\r\n   const { amount } = req.body;\r\n \r\n+  console.log('Amount received:', amount);  // Debug line\r\n+\r\n   try {\r\n     const options = {\r\n-      amount: amount * 100, // amount in the smallest currency unit (paise)\r\n+      amount: amount * 100, // in paise\r\n       currency: 'INR',\r\n       receipt: `receipt_order_${Date.now()}`,\r\n     };\r\n \r\n     const order = await razorpay.orders.create(options);\r\n+    console.log('Order created:', order);  // Debug line\r\n+\r\n     res.status(201).json(order);\r\n   } catch (error) {\r\n     console.error('Razorpay Order Creation Error:', error);\r\n     res.status(500).json({ message: 'Internal Server Error' });\r\n"
+                },
+                {
+                    "date": 1747741401628,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,11 +11,15 @@\n   const { amount } = req.body;\r\n \r\n   console.log('Amount received:', amount);  // Debug line\r\n \r\n+  if (!amount || typeof amount !== 'number' || amount <= 0) {\r\n+    return res.status(400).json({ message: 'Invalid amount' });\r\n+  }\r\n+\r\n   try {\r\n     const options = {\r\n-      amount: amount * 100, // in paise\r\n+      amount: amount * 100, // amount in paise\r\n       currency: 'INR',\r\n       receipt: `receipt_order_${Date.now()}`,\r\n     };\r\n \r\n@@ -24,7 +28,7 @@\n \r\n     res.status(201).json(order);\r\n   } catch (error) {\r\n     console.error('Razorpay Order Creation Error:', error);\r\n-    res.status(500).json({ message: 'Internal Server Error' });\r\n+    res.status(500).json({ message: 'Internal Server Error', error: error.message });\r\n   }\r\n };\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1747654526155,
+            "name": "Commit-0",
+            "content": "import Razorpay from 'razorpay';\r\nimport dotenv from 'dotenv';\r\ndotenv.config();\r\n\r\nconst razorpay = new Razorpay({\r\n  key_id: process.env.RAZORPAY_KEY_ID,\r\n  key_secret: process.env.RAZORPAY_KEY_SECRET,\r\n});\r\n\r\n// @desc    Create Razorpay Order\r\n// @route   POST /api/payments/order\r\n// @access  Private\r\nexport const createOrder = async (req, res) => {\r\n  const { amount } = req.body;\r\n\r\n  try {\r\n    const options = {\r\n      amount: amount * 100, // amount in the smallest currency unit (paise)\r\n      currency: 'INR',\r\n      receipt: `receipt_order_${Date.now()}`,\r\n    };\r\n\r\n    const order = await razorpay.orders.create(options);\r\n    res.status(201).json(order);\r\n  } catch (error) {\r\n    console.error('Razorpay Order Creation Error:', error);\r\n    res.status(500).json({ message: 'Internal Server Error' });\r\n  }\r\n};"
+        }
+    ]
+}
